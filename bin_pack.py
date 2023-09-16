@@ -5,7 +5,13 @@ import random
 
 app = Flask(__name__)
 
-app.secret_key = b'suieoNII902883094u___123$'
+num = ''
+for i in range(15):
+    num += str(random.randint(0, 9))
+
+app.config['SESSION_TYPE'] = 'filesystem'
+
+app.secret_key = num
 
 def random_num_gen():
     while True:
@@ -14,11 +20,9 @@ def random_num_gen():
             num += str(random.randint(0, 9))
         num = int(num)
 
-        if num not in session['problemIDs']:
-            session['problemIDs'].append(num)
-            session['problems'].append([num, '####', []])
-            break
-    return int(num)
+        session['problemIDs'].append(num)
+        session['problems'].append([num, '####', [100]])
+        return num
 
 def checksession():
     if 'problemIDs' not in session:
@@ -27,14 +31,13 @@ def checksession():
         session['problems'] = []
 
 def checkID(problemID):
-    if problemID not in session['problemIDs']:
-        return False
-    print(session['problems'])
+    print("current problem ID", problemID)
+    print("Current problemIDS in session", session['problems'])
+ 
     for problem in session['problems']:
-        print(problem)
-        if problem[0] == problemID:
+        if int(problem[0]) == int(problemID):
             return problem
-
+    return False
 
 @app.route("/newproblem")
 def newproblem():
@@ -49,22 +52,79 @@ def newproblem():
 
 @app.route('/placeitem/<problemID>/<size>')
 def placeitem(problemID, size):
-    checksession()
     problem = checkID(problemID)
     if not problem:
         return "Invalid problem ID"
+    
+    bins = problem[2]
+    placed = False
 
+    for index, bin in enumerate(bins):
+        if int(bin) > int(size):
+            bins[index] = int(bin) - int(size)
+            placed = True
+            
+    encoding = problem[1].replace('##','')
+    encoding = encoding.split('#')
+
+    if not placed:
+        bins.append(100-int(size))
+        encoding.append('')
+        index += 1
+    
+    if len(encoding[index]) == 0:
+        encoding[index] = str(size)
+    else:
+        encoding[index] += '!' + str(size)
+
+    encoding = '#'.join(encoding)
+
+    encoding = '##' + encoding + '##'
+
+    problem[1] = encoding
+
+    allProblems = session['problems']
+
+    for index, oldProblem in enumerate(allProblems):
+        if int(oldProblem[0]) == problemID:
+            allProblems[index] = problem
+    
+    session['problems'] = allProblems
 
     res = {
         'ID': problem[0],
         'size': size,
-        'loc': 932,
-        'bins': problem[2]
+        'loc':index + 1,
+        'bins': problem[1]
     }
 
-    # updateProblem()
-
     return jsonify(res)
+
+@app.route('/endproblem/<problemID>')
+def endproblem(problemID):
+    problem = checkID(problemID)
+    if not problem:
+        return "Invalid problem ID"
+
+    encoding = problem[1].replace('##','')
+    encoding = encoding.split('#')
+   
+   total_size = 0
+   for bin in encoding:
+    if '!' in bin:
+        
+
+
+    print(encoding)
+
+    end = {
+        'ID': problem[0],
+        'size': 0,
+        'loc':1,
+        'bins': problem[1]
+    }
+
+    return jsonify(end)
     
 
 
