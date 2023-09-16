@@ -16,20 +16,9 @@ def random_num_gen():
 
         if num not in session['problemIDs']:
             session['problemIDs'].append(num)
-            session['problems'].append([num, '####', [[]]])
+            session['problems'].append([num, '####', []])
             break
     return int(num)
-
-
-@app.route("/newproblem")
-def newproblem():
-    checksession()
-    ID = random_num_gen()
-    returnObj = {
-        'ID': ID,
-        'bins': '####',
-    }
-    return jsonify(returnObj)
 
 def checksession():
     if 'problemIDs' not in session:
@@ -40,24 +29,42 @@ def checksession():
 def checkID(problemID):
     if problemID not in session['problemIDs']:
         return False
-    return True
+    print(session['problems'])
+    for problem in session['problems']:
+        print(problem)
+        if problem[0] == problemID:
+            return problem
 
 
-@app.route('/placeitem/problemID/<size>')
-def placeitem(problemID,size):
+@app.route("/newproblem")
+def newproblem():
     checksession()
-    if not checkID(problemID):
-        return 404
-    
-    response = {
-        'ID': problemID,
-        'size': size,
-        'loc': ,
-        'bins': 
+    ID = random_num_gen()
+    res = {
+        'ID': ID,
+        'bins': '####',
     }
-    return jsonify(response)
+    return jsonify(res)
 
 
+@app.route('/placeitem/<problemID>/<size>')
+def placeitem(problemID, size):
+    checksession()
+    problem = checkID(problemID)
+    if not problem:
+        return "Invalid problem ID"
+
+
+    res = {
+        'ID': problem[0],
+        'size': size,
+        'loc': 932,
+        'bins': problem[2]
+    }
+
+    # updateProblem()
+
+    return jsonify(res)
     
 
 
