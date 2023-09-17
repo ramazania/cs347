@@ -107,20 +107,33 @@ def endproblem(problemID):
         return "Invalid problem ID"
 
     encoding = problem[1].replace('##','')
-    encoding = encoding.split('#')
+    bins = encoding.split('#')
    
-   total_size = 0
-   for bin in encoding:
-    if '!' in bin:
-        
+    total_size = 0
+    for bin in bins:
+        if '!' in bin:
+            bin = bin.split('!')
+            for item in bin:
+                total_size += int(item)
+        else:
+            total_size += int(bin)
+    
+      
+    num_items = 0
+    for bin in bins:
+        bin = bin.split('!')
+        num_items += len(bin)
 
-
-    print(encoding)
-
+    num_bins = len(bins)
+    total_capacity = num_bins * 100
+    wasted_space = total_capacity - total_size
+    
     end = {
         'ID': problem[0],
-        'size': 0,
-        'loc':1,
+        'size': total_size,
+        'items': num_items,
+        'count': num_bins,
+        'wasted': wasted_space,
         'bins': problem[1]
     }
 
