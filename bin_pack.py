@@ -20,19 +20,19 @@ def random_num_gen():
             num += str(random.randint(0, 9))
         num = int(num)
 
-        session['problemIDs'].append(num)
-        session['problems'].append([num, '####', [100]])
+        lst = session['problems']
+        lst.append([num, '####', [100]])
+        session['problems'] = lst
+
         return num
 
 def checksession():
-    if 'problemIDs' not in session:
-        session['problemIDs'] = []
     if 'problems' not in session:
         session['problems'] = []
 
 def checkID(problemID):
-    print("current problem ID", problemID)
-    print("Current problemIDS in session", session['problems'])
+    # print("current problem ID", problemID)
+    # print("Current problems in session", session['problems'])
  
     for problem in session['problems']:
         if int(problem[0]) == int(problemID):
@@ -47,8 +47,8 @@ def newproblem():
         'ID': ID,
         'bins': '####',
     }
-    return jsonify(res)
 
+    return jsonify(res)
 
 @app.route('/placeitem/<problemID>/<size>')
 def placeitem(problemID, size):
@@ -60,15 +60,16 @@ def placeitem(problemID, size):
     placed = False
 
     for index, bin in enumerate(bins):
-        if int(bin) > int(size):
+        if int(bin) >= int(size):
             bins[index] = int(bin) - int(size)
             placed = True
+            break
             
     encoding = problem[1].replace('##','')
     encoding = encoding.split('#')
 
     if not placed:
-        bins.append(100-int(size))
+        bins.append(100 - int(size))
         encoding.append('')
         index += 1
     
@@ -85,9 +86,9 @@ def placeitem(problemID, size):
 
     allProblems = session['problems']
 
-    for index, oldProblem in enumerate(allProblems):
-        if int(oldProblem[0]) == problemID:
-            allProblems[index] = problem
+    for index1, oldProblem in enumerate(allProblems):
+        if int(oldProblem[0]) == int(problemID):
+            allProblems[index1] = problem
     
     session['problems'] = allProblems
 
@@ -107,26 +108,30 @@ def endproblem(problemID):
         return "Invalid problem ID"
 
     encoding = problem[1].replace('##','')
-    bins = encoding.split('#')
-   
-    total_size = 0
-    for bin in bins:
-        if '!' in bin:
-            bin = bin.split('!')
-            for item in bin:
-                total_size += int(item)
-        else:
-            total_size += int(bin)
-    
-      
-    num_items = 0
-    for bin in bins:
-        bin = bin.split('!')
-        num_items += len(bin)
 
-    num_bins = len(bins)
-    total_capacity = num_bins * 100
-    wasted_space = total_capacity - total_size
+    num_items = 0
+    total_size = 0
+    num_bins = 0
+    wasted_space = 0
+
+    if encoding != '':
+        bins = encoding.split('#')
+
+        for bin in bins:
+            if '!' in bin:
+                bin = bin.split('!')
+                for item in bin:
+                    total_size += int(item)
+            else:
+                total_size += int(bin)
+        
+        for bin in bins:
+            bin = bin.split('!')
+            num_items += len(bin)
+
+        num_bins = len(bins)
+        total_capacity = num_bins * 100
+        wasted_space = total_capacity - total_size
     
     end = {
         'ID': problem[0],
@@ -137,9 +142,15 @@ def endproblem(problemID):
         'bins': problem[1]
     }
 
-    return jsonify(end)
-    
+    allProblems = session['problems']
+    for index, problem1 in enumerate(allProblems):
+        if int(problem1[0]) == int(problemID):
+            allProblems.pop(index)
+            break
 
+    session['problems'] = allProblems
+
+    return jsonify(end)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A sample Flask application/API')
