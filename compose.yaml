@@ -7,11 +7,11 @@
 # ... However, no ports are available to the real machine
 
 services:
-    homework_2:
-        build: ./homework_2
+    evaluation:
+        build: ./evaluation
         ports:
           - "7555:5000"
-    # api:
-    #     build: ./api
-    #     expose:
-    #       - "5000"
+    homework_2:
+        build: ./homework_2
+        expose:
+          - "5000"
