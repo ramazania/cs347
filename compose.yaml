@@ -1,0 +1,17 @@
+# This starts two services
+# The first is called "web" and uses the Dockerfile in the ./web directory
+# Port 7555 on the real machine forwards to Port 5000 in the "web" container
+
+# The second service is called "api" and uses the Dockerfile in ./api
+# This service exposes port 5000 to other docker container machines
+# ... However, no ports are available to the real machine
+
+services:
+    homework_2:
+        build: ./homework_2
+        ports:
+          - "7555:5000"
+    # api:
+    #     build: ./api
+    #     expose:
+    #       - "5000"
