@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    response = requests.get('http://api:5000/newgame/x')
+    response = requests.get('http://homework_2:5000/newgame/x')
     jsonResponse = response.json()    
     return render_template("index.html")
 
