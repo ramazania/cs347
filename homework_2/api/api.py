@@ -64,11 +64,9 @@ def updateO(board,row,col):
             nums+=1
     return nums
         
-
 @app.route('/')
 def main():
     return 'Welcome to a simple 2 Player API implementation of Pente created by Khizar Qureshi & Ntense Obono'
-
 
 @app.route('/newgame/<player>')
 def new_game(player):
@@ -82,7 +80,6 @@ def new_game(player):
     gameState = 'player:' + player + '#' + 'board:' + formatted_board + '#' + 'capturedX: 0' + '#' + 'capturedO: 0'
     games[gameID] =  {'player': player, 'board': boardSetup, 'capturedX': 0, 'capturedO': 0}
     return json.dumps({'ID':gameID, 'state':gameState})
-
 
 @app.route('/nextmove/<int:gameID>/<int:row>/<int:col>')
 def new_move(gameID, row, col):
@@ -122,6 +119,20 @@ def new_move(gameID, row, col):
                 capturedX += updateX(board, rowIndex, colIndex)
             elif col == 'x':
                 capturedO += updateO(board, rowIndex, colIndex)
+
+    #check is 5 pieces of x or o occur in a row
+    for row in board:
+        total = ""
+        for val in row:
+            total = total + val
+
+        print(total)
+        if "xxxxx" in total:
+            games.pop(gameID)
+            return "x has won the game!"
+        elif "ooooo" in total:
+            games.pop(gameID)
+            return "o has won the game!"
                         
     formatted_board = get_board(board)
     # create new game state
@@ -131,8 +142,9 @@ def new_move(gameID, row, col):
     return json.dumps({'ID':gameID, 'row':myRow, 'column': myCol, 'gameState': new_game_state})
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser("Simple Flask application")
-    parser.add_argument('host', help = 'the host on which this application is running')
-    parser.add_argument('port', type = int, help = 'the port in which this application is listening')
-    arguments = parser.parse_args()
-    app.run(host = arguments.host, port = arguments.port, debug= True)
+    # parser = argparse.ArgumentParser("Simple Flask application")
+    # parser.add_argument('host', help = 'the host on which this application is running')
+    # parser.add_argument('port', type = int, help = 'the port in which this application is listening')
+    # arguments = parser.parse_args()
+    # app.run(host = arguments.host, port = arguments.port, debug= True)
+    app.run(port=5000)
