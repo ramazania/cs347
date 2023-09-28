@@ -129,10 +129,10 @@ def new_move(gameID, row, col):
         print(total)
         if "xxxxx" in total:
             games.pop(gameID)
-            return "x has won the game!"
+            return "x won"
         elif "ooooo" in total:
             games.pop(gameID)
-            return "o has won the game!"
+            return "o won"
                         
     formatted_board = get_board(board)
     # create new game state
@@ -146,5 +146,5 @@ if __name__ == '__main__':
     # parser.add_argument('host', help = 'the host on which this application is running')
     # parser.add_argument('port', type = int, help = 'the port in which this application is listening')
     # arguments = parser.parse_args()
-    # app.run(host = arguments.host, port = arguments.port, debug= True)
-    app.run(port=5000)
+    app.run(host = 'localhost', port = 8080, debug= True)
+    # app.run(port=5000)
