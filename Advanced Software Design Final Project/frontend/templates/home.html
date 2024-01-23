@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block header1 %}Welcome To<br>Mastermind{% endblock header1 %}
+
+{% block content %}
+
+    <div class="home-body">
+        <h2>What's Mastermind?</h2>
+        <img src="{{ url_for('static', filename='Mastermind.jpg') }}" alt="Mastermind board">
+        <p class="home-p">
+        Mastermind is a game all about cracking codes. A colorcoded
+        password will be generated, and its up to you to guess the
+        exact code!
+        </p>
+    </div>
+
+    <div class="home-body">
+        <h2>Guess with caution!</h2>
+        <!-- <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;" alt="Under Construction"> -->
+        <p class="home-p">
+        You only have a few chances to break your opponent's code.
+        Choose your colors wisely, and pay attention to the hints
+        you obtain with each guess!
+        </p>
+    </div>
+
+    <!-- <div class="home-body">
+        <h2>Customize your <br>Mastermind experience!</h2>
+        <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;" alt="Under Construction">
+        <p class="home-p">
+        Want Mastermind a little more to your liking? You can modify password length,
+        your number of guesses, the available colors, and more!
+        </p>
+    </div> -->
+
+    <div class="home-end">
+        <h2>Play Mastermind!</h2>
+        <a class="buttonlink oldgame" href="{{ url_for('howtoplay') }}">How To Play</a>
+    </div>
+
+{% endblock content %}

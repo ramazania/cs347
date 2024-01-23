@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Scoreboard{% endblock title %}
+
+{% block header1 %}Scoreboard{% endblock header1 %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='scoreboard.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- A scoreboard page to display interesting statistics about each player -->
+<!-- Implemented by Aidan Roessler from team Vaas-->
+<body>
+    <div class="table-container">
+    <table id="scoreboard">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Game ID</th>
+                <th scope="col">Attempts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in list_of_players %}
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>{{ player.gameID }}</td>
+                <td>{{ player.attempts }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</body>
+
+{% endblock content %}

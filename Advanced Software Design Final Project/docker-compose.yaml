@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5500"
+    restart: on-failure
+  db:
+    image: mysql
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: y6#n9c
+    restart: on-failure
+
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+      - ./db-storage:/var/lib/mysql

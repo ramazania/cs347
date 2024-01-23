@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Lookup{% endblock title %}
+
+{% block header1 %}Lookup Player{% endblock header1 %}
+
+{% block content %}
+
+    <div>
+        <p style="font-size:6em"><em>Enter Game ID</em></p>
+    </div>
+
+	<form action="/player" method = "POST">
+		<p> Name <input type = "text" name = "name" /> </p>
+		<p> <input type = "submit" value = "Submit" /></p>
+	</form>
+
+{% endblock content %}

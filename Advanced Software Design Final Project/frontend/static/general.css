@@ -1,0 +1,195 @@
+/*
+Properties to effect the entire html file.
+All sizes are done in relative lengths (mainly 'em' and '%') rather than absolute lengths (px, cm, mm).
+All colors are in rgb format for a consistent format.
+Most if not all of the spacing is done with padding rather then margins. Margins effect space in relation to
+    objects, while padding effects space in relation to anything within an object. Be careful when adding
+    margins as to not screw with text and image layouts.
+*/
+html{
+    background: linear-gradient(rgb(40, 47, 66), rgb(54, 27, 50)) no-repeat center / cover scroll;
+    padding: 4em 0em 4em 0em;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    color: rgb(222, 222, 222);
+}
+
+/*
+Properties for the navigation element and its classes/attributes.
+*/
+nav {
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 1.5em 1em;
+    width: 100%;
+    overflow: hidden;
+    text-align: left;
+    background-color: rgb(25, 16, 29);
+}
+
+nav a {
+    text-decoration-line: none;
+    padding: 1.25em 2em;
+    color: rgb(222, 222, 222);
+}
+
+nav a:hover:not(.viewing) {
+    background: rgb(50, 32, 58)
+}
+
+.viewing {
+    background: rgb(159, 106, 161);
+}
+
+/*
+Properties for headers.
+*/
+h1 {
+    color: rgb(222, 222, 222);
+    font-size: 6em;
+    text-align: center;
+}
+
+h2 {
+    color: rgb(185, 186, 192);
+    font-size: 4em;
+    text-align: center;
+}
+
+h3 {
+    color: rgb(185, 186, 192);
+    font-size: 3em;
+}
+
+/*
+Properties for home page classes.
+*/
+p.home-p {
+    font-size: 1.5em;
+    width: 40%;
+}
+
+div.home-body, div.home-end {
+    position: relative;
+    padding: 6em 0em;
+    text-align: left;
+    width: 75%;
+    margin: 0 auto;
+}
+
+div.home-end {
+    text-align: center;
+}
+
+.buttonlink {
+    position: relative;
+    margin: .25em 1em;
+    padding: 0em .5em;
+    height: 4em;
+    background-color: grey;
+    font-size: 2em;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.507);
+    border-radius: .75em;
+    transition: .3s;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonlink:hover {
+    transform: scale(1.075, 1.075);
+    box-shadow: 0 0 0 .25em rgba(255, 255, 255, 0.507);
+    color: rgb(0, 0, 0);
+}
+
+.oldgame:hover {
+    background-color: rgb(88, 151, 187);
+}
+
+/*
+Properties for temporary elements.
+*/
+div.wip {
+    position: relative;
+    padding: 4em 4em;
+    text-align: center;
+    width: 75%;
+    margin: 0 auto;
+}
+
+img.wip {
+    width: 35%;
+    height: 10%;
+}
+
+.centered-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh; /* Adjust height as needed */
+}
+
+/*
+Properties for results page.
+*/
+.results-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.results-p {
+    font-size: 1.5em;
+    width: 40%;
+}
+
+#results-password {
+    position: relative;
+    margin: 2em auto;
+    padding: 1em 1em 1em 1em;
+    background-color: rgba(0, 0, 0, 0.26);
+    border-radius: .75em;
+    overflow: visible;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+span.coloricon {
+    appearance: none;
+    position: relative;
+    width: 5.5em;
+    height: 5.5em;
+    margin: 1em .5em;
+    overflow: visible;
+    border-radius: 100%;
+    flex-direction: column;
+    box-shadow:none;
+}
+
+.coloricon {
+    appearance: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: inline-block;
+    cursor: default;
+    box-shadow: 0 -1em 0 0 rgba(54, 27, 50, 0.753) inset, 
+                0 0 0 .25em rgba(255, 255, 255, 0);
+    border-radius: 100%;
+    transition: .3s ease-out;
+}

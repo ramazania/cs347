@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Game Set Up{% endblock title %}
+
+{% block header1 %}Game Set Up{% endblock header1 %}
+
+{% block content %}
+
+    <div class="wip">
+        <p style="font-size: 6em;"><em>Enter Your Player Name Below</em></p>
+    </div>
+
+    <div class="centered-form">
+        <form action="/insert" method="POST">
+            <p> Player <input type="text" name="player" /> </p>
+            <p> <input type="submit" value="Submit" /> </p>
+        </form>
+    </div>
+{% endblock content %}

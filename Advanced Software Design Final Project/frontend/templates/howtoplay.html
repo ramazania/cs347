@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}How To Play{% endblock title %}
+
+{% block header1 %}How To Play{% endblock header1 %}
+
+{% block content %}
+
+    <div class="wip">
+        <p style="font-size:6em"><em>Mastermind</em></p>
+    </div>
+
+    <div class="home-body">
+        <h2></h2>
+        <p>At the start of every game, a randomized password will be generated. Using your provided colors, your job
+        is to guess not just the colors in the password, but their order too.
+        </p>
+        <img src="{{ url_for('static', filename='Scoreboard.png') }}" alt="Game Board">
+    </div>
+
+    <div class="home-body">
+        <h2></h2>
+        <p>Create your password attempt by pressing any of the provided colors. A preview of your current guess is displayed above.
+        You can change remove colors from your guess by pressing them again. Once your password is complete, 
+        the "submit" button will be available to press.
+        </p>
+        <img src="{{ url_for('static', filename='Scoreboard_2.png') }}" alt="Game Board being used">
+    </div>
+
+    <div class="home-body">
+        <h2></h2>
+        <!-- <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;" alt="Under Construction"> -->
+        <p>Your guess is either right or wrong. If it's right, you win! But if it's wrong, you'll have to guess again. 
+        But don't worry: <strong>hints</strong> will be given for every correct color in your guess. <strong>White Hints</strong> mean that one of your guess's
+        colors is in the original password. <strong>Red Hints</strong> mean one of the colors is in the password <em>and</em> is in the correct
+        position.
+        </p>
+    </div>
+
+{% endblock content %}

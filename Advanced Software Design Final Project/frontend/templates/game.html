@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/game.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../static/game.js"></script>
+    <title>Mastermind - Game</title>
+</head>
+<body>
+    <div class="board">
+    <p>Player: {{player}}</p>
+    <p>Game ID: {{game_id}}</p>
+        <table class="gameInfo" id="gameInfo">
+            <tr>
+                <th style="width:10%" id="Turn">Turn</th>
+                <th style="width:65%" id="Guesses">Guesses</th>
+                <th style="width:25%" id="Hints">Hints</th>
+            </tr>
+          </table>
+    </div>
+
+    <div>
+        <div class="currentpassword" id="currentpassword">
+            <div>Current<br>Password</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <form id="passwordattempt">
+        <input type="submit" id="submit" class="submit" value="Waiting" disabled>
+        </form>
+    </div>
+    
+    <script> // Script to create the game page, using "game.js" functions
+        const colorList = ["red","green","blue","purple","saddlebrown","pink"];
+        setUpBoard(8);
+        setUpColors(colorList);
+    </script> 
+
+</body>
+</html>

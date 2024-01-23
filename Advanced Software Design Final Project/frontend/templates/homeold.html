@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
+    <title>Mastermind - Home</title>
+</head>
+
+<body>
+
+    <h1>Welcome to<br>Mastermind </h1>
+
+    <h2><em>Can you crack the code?</em></h2>
+
+    <!--Need to add code for gameplay previews-->
+
+    <div class="home-mm">
+        <h3>What's Mastermind?</h3>
+        <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;">
+        <p class="home-p">
+        Mastermind is a game all about cracking codes. Your oppenent loves making
+        strange color-coded passwords, and its up to you to figure them out!
+        </p>
+        
+    </div>
+
+    <div class="home-guess">
+        <h3>Guess with caution!</h3>
+        <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;">
+        <p class="home-p">
+        You only have a few chances to break your opponent's code.
+        Choose your colors wisely, and pay attention to the hints
+        you obtain with each guess!
+        </p>
+    </div>
+
+    <div class="home-customize">
+        <h3>Customize your <br>Mastermind experience!</h3>
+        <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;">
+        <p class="home-p">
+        Want Mastermind a little more to your liking? You can modify password length,
+        your number of guesses, the available colors, and more!
+        </p>
+    </div>
+
+    <div class="home-end">
+        <h3>[text]</h3>
+        <p class="home-p">
+        Play Mastermind!
+        </p>
+        <img class="wip" src="{{ url_for('static', filename='MM_wip.png') }}" style="float:right;">
+    </div>
+
+    <!--Need to add the end of the page-->
+
+    <nav>
+        <a class="viewing" href="home.html">Home</a>
+        <a href="pregame.html">Start Master Mind</a>
+        <a href="howtoplay.html">How to play Master Mind</a>
+        <a href="scoreboard.html">Scoreboard</a>
+        <a href="about.html">About</a>
+    </nav>
+
+</body>
+</html>
